@@ -333,11 +333,3 @@ The following conditions will cause the game to end:
     never sends a line that says "`go`") it forfeits the game.
   * A bot attempts to do something that the tournament manager deems a
     security issue and is disqualified.
-
-More Information
-================
-
-If you have a question about the game mechanics, you may ask in the
-[forums](http://ai-contest.com/forum/), ask in the #aichallenge IRC
-channel on Freenode, or go straight to the contest's
-[source code](http://code.google.com/p/ai-contest/source/browse/#svn/trunk/planet_wars).
