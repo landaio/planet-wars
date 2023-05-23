@@ -11,8 +11,12 @@ import tools.map_generator_v2
 GAME_ENGINE_COMMAND = "java -jar tools/PlayGame-1.2.jar"
 
 BOTS = [
-    "LandaBot.py",
     "AmitBot.py",
+    "Adi2Bot.py",
+    "AsianBot.py",
+    "DenisBot.py",
+    "HadarBot.py",
+    "ShiranBot.py",
 ]
 
 if __name__ == "__main__":

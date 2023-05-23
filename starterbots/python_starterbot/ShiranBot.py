@@ -12,8 +12,9 @@
 // starting point, or you can throw it out entirely and replace it with your
 // own.
 """
-
+import itertools
 from PlanetWars import PlanetWars
+
 
 
 def DoTurn(pw):
@@ -26,34 +27,29 @@ def DoTurn(pw):
     if len(pw.MyFleets()) >= 1:
         return
 
-    # (2) Find my planet with the most amount of ships
     source_planet = -1
     source_num_ships = 0
     my_planets = pw.MyPlanets()
+
     for p in my_planets:
         score = float(p.NumShips())
         if score > source_num_ships:
             source_planet = p.PlanetID()
             source_num_ships = p.NumShips()
 
-    # (3) Find the weakest enemy or neutral planet.
-    best_planet = -1
-    best_planet_distance = 999999.0
-    best_planet_score = 999999.0
     not_my_planets = pw.NotMyPlanets()
+    closest_planets = 5
+    distances = {}
     for p in not_my_planets:
-        if p.NumShips() < best_planet_score and \
-                (best_planet == -1 or pw.Distance(best_planet, p.PlanetID()) < best_planet_distance):
-            best_planet_score = p.NumShips()
-            best_planet_distance = pw.Distance(best_planet, p.PlanetID())
-            best_planet = p.PlanetID()
+        if p.NumShips() < source_num_ships:
+            distances[p.PlanetID()] = pw.Distance(source_planet, p.PlanetID())
 
-    # (4) Send half the ships
-    if source_planet >= 0 and best_planet >= 0:
-        num_ships = source_num_ships / 2
-        pw.IssueOrder(source_planet, best_planet, num_ships)
-
-
+    sorted_dict = dict(sorted(distances.items(), key=lambda x: x[1], reverse=False))
+    closest_planets = dict(itertools.islice(sorted_dict.items(), closest_planets))
+    for id_, distance in closest_planets.items():
+        num_ships = source_num_ships / 3
+        pw.IssueOrder(source_planet, id_, num_ships)
+        source_num_ships -= num_ships
 """
 //
 //

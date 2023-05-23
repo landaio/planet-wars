@@ -49,10 +49,6 @@ if __name__ == "__main__":
         "player_one", action="store", type=str, help="command to run the first bot.")
     parser.add_argument(
         "player_two", action="store", type=str, help="command to run the second bot.")
-    parser.add_argument(
-        "player_one_name", action="store", type=str, help="name of the first bot.")
-    parser.add_argument(
-        "player_two_name", action="store", type=str, help="name of the second bot.")
     arguments = parser.parse_args()
 
     if not arguments.old_maps:
@@ -66,8 +62,8 @@ if __name__ == "__main__":
         player_one = arguments.player_one
         player_two = arguments.player_two
 
-    player_one_name = arguments.player_one_name
-    player_two_name = arguments.player_two_name
+    player_one_name = arguments.player_one.split('/')[-1].replace('.py', '')
+    player_two_name = arguments.player_two.split('/')[-1].replace('.py', '')
 
     subprocess.call(
         "java -jar tools/PlayGame-1.2.jar {} {} {} \"{}\" \"{}\" \"{}\" {}".format(
